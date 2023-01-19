@@ -1,7 +1,10 @@
+import { AccountForm } from "./componets/AccountForm"
+import { AddressForm } from "./componets/AddressForm"
+import { UserForm } from "./componets/UserForm"
 import { useMultistepForm } from "./hooks/useMultistepForm"
 
 function App() {
-  const { steps, currentStepIndex } = useMultistepForm([<div>One</div>, <div>Two</div>])
+  const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } = useMultistepForm([<UserForm />, <AddressForm />, <AccountForm />])
   const {} = useMultistepForm(steps)
   return <div style={{
     position: "relative",
@@ -19,7 +22,17 @@ function App() {
         right: ".5rem",
       }}>
         {currentStepIndex + 1} / {steps.length}
-        
+      </div>
+      {step}
+      <div style={{
+        marginTop: "1rem",
+        display: "flex",
+        gap: ".5rem",
+        justifyContent: "flex-end"
+        }}>
+          {!isFirstStep && <button type="button" onClick={back}>Back</button>}
+          <button type="button" onClick={next}>{isLastStep ? "Finish" : "Next"}</button>
+
       </div>
     </form>
   </div>
