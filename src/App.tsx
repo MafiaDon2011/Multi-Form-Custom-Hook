@@ -45,7 +45,8 @@ function App() {
 
   function onSubmit(e: FormEvent) {
     e.preventDefault()
-    next()
+    if (!isLastStep) return next()
+    alert("Account Creation Successful")
   }
 
   return <div style={{
@@ -55,7 +56,8 @@ function App() {
     padding: "2rem",
     margin: "1rem",
     borderRadius: ".5rem",
-    fontFamily: "Arial"
+    fontFamily: "Arial",
+    maxWidth: "max-content"
   }}>
     <form onSubmit={onSubmit}>
       <div style={{
